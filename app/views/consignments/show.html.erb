@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company code:</strong>
+  <%= @consignment.company_code %>
+</p>
+
+<p>
+  <strong>Reference:</strong>
+  <%= @consignment.reference %>
+</p>
+
+<p>
+  <strong>Parcels:</strong>
+  <%= @consignment.parcels %>
+</p>
+
+<p>
+  <strong>Pallets:</strong>
+  <%= @consignment.pallets %>
+</p>
+
+<p>
+  <strong>Bundles:</strong>
+  <%= @consignment.bundles %>
+</p>
+
+<%= link_to 'Edit', edit_consignment_path(@consignment) %> |
+<%= link_to 'Back', consignments_path %>

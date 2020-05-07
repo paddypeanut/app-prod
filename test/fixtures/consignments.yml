@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  company_code: MyString
+  reference: MyString
+  parcels: 1
+  pallets: 1
+  bundles: 1
+
+two:
+  company_code: MyString
+  reference: MyString
+  parcels: 1
+  pallets: 1
+  bundles: 1

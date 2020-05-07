@@ -1,0 +1,47 @@
+<%= form_with(model: consignment, local: true) do |form| %>
+  <% if consignment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(consignment.errors.count, "error") %> prohibited this consignment from being saved:</h2>
+
+      <ul>
+        <% consignment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :company_code %>
+    <%= form.text_field :company_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :reference %>
+    <%= form.text_field :reference %>
+  </div>
+
+  <div class="field">
+    <%= form.label :parcels %>
+    <%= form.number_field :parcels %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pallets %>
+    <%= form.number_field :pallets %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bundles %>
+    <%= form.number_field :bundles %>
+  </div>
+
+  <div class="field hide">
+        <%= form.label :user_id %>
+        <input type="text" id="user_id" name="consignment[user_id]" value="<%= current_user.id %>">
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
