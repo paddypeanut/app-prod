@@ -25,7 +25,7 @@
     <% @results.each do |consignment| %>
       <tr>
         <td><%= consignment.id %></td>
-        <td><%= consignment.customer.company_name%></td>
+        <td><%= link_to consignment.customer.company_name ,consignment.customer%></td>
         <td><%= consignment.reference %></td>
         <td><%= consignment.parcels %></td>
         <td><%= consignment.pallets %></td>
