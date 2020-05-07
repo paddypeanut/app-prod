@@ -5,6 +5,7 @@ class CustomersController < ApplicationController
   # GET /customers.json
   def index
     @customers = Customer.all
+    @user_customers = Customer.where(user_id: session[:user_id])
   end
 
   # GET /customers/1

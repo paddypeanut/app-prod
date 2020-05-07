@@ -5,6 +5,7 @@ class ConsignmentsController < ApplicationController
   # GET /consignments.json
   def index
     @consignments = Consignment.all
+    @results = @consignments.joins(:customer).includes(:user).where(user: session[:user_id])
   end
 
   # GET /consignments/1
@@ -15,6 +16,7 @@ class ConsignmentsController < ApplicationController
   # GET /consignments/new
   def new
     @consignment = Consignment.new
+    @customers = Customer.joins(:user).where(user: session[:user_id])
   end
 
   # GET /consignments/1/edit
@@ -69,6 +71,6 @@ class ConsignmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def consignment_params
-      params.require(:consignment).permit(:company_code, :reference, :parcels, :pallets, :bundles,:user_id)
+      params.require(:consignment).permit(:company_code ,:customer_id, :reference, :parcels, :pallets, :bundles,:user_id)
     end
 end

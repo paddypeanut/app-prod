@@ -11,10 +11,17 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :company_code %>
-    <%= form.text_field :company_code %>
-  </div>
+  <% options = options_from_collection_for_select(@customers, 'company_name', 'company_name') %>
+      <%= form.select:company_code, options %>
+      <br>
+      <br>
+
+      <div class="hide">
+      <% options2 = options_from_collection_for_select(@customers, 'id', 'id') %>
+      <%= form.select:customer_id, options2 %>
+      </div>
+
+  
 
   <div class="field">
     <%= form.label :reference %>
@@ -45,3 +52,23 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+<script>
+  jQuery(
+
+      function($){
+        $('#consignment_company_code').on('change',function(){
+
+          var sel = $('option:selected', this).index();
+
+
+
+          $('#consignment_customer_id option').filter(function(index, el){
+            return el.index == sel;
+          }).prop('selected',true);
+
+         
+        });
+      });
+
+</script>
