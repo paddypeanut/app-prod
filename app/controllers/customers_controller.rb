@@ -1,11 +1,13 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
 
+
   # GET /customers
   # GET /customers.json
   def index
     @customers = Customer.all
     @user_customers = Customer.where(user_id: session[:user_id])
+    
   end
 
   # GET /customers/1

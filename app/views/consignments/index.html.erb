@@ -1,15 +1,22 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Consignments</h1>
+<%= @results.inspect %>
 
 <table>
   <thead>
     <tr>
-      <th>Company code</th>
+      <th>Job Id</th>
+      <th>Company</th>
       <th>Reference</th>
       <th>Parcels</th>
       <th>Pallets</th>
       <th>Bundles</th>
+      <th>Add 1</th>
+      <th>Add 2</th>
+      <th>Add 3</th>
+      <th>County</th>
+      <th>Eircode</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,11 +24,17 @@
   <tbody>
     <% @results.each do |consignment| %>
       <tr>
-        <td><%= consignment.company_code %></td>
+        <td><%= consignment.id %></td>
+        <td><%= consignment.customer.company_name%></td>
         <td><%= consignment.reference %></td>
         <td><%= consignment.parcels %></td>
         <td><%= consignment.pallets %></td>
         <td><%= consignment.bundles %></td>
+        <td><%= consignment.customer.address1 %></td>
+        <td><%= consignment.customer.address2 %></td>
+        <td><%= consignment.customer.address3 %></td>
+        <td><%= consignment.customer.county %></td>
+        <td><%= consignment.customer.eircode %></td>
         <td><%= link_to 'Show', consignment %></td>
         <td><%= link_to 'Edit', edit_consignment_path(consignment) %></td>
         <td><%= link_to 'Destroy', consignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>

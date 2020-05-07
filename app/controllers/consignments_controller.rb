@@ -5,7 +5,7 @@ class ConsignmentsController < ApplicationController
   # GET /consignments.json
   def index
     @consignments = Consignment.all
-    @results = @consignments.joins(:customer).includes(:user).where(user: session[:user_id])
+    @results = @consignments.joins(:customer).includes(:user).where(user: session[:user_id]).order('consignments.created_at DESC')
   end
 
   # GET /consignments/1
