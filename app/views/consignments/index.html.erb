@@ -17,6 +17,7 @@
       <th>Add 3</th>
       <th>County</th>
       <th>Eircode</th>
+      <th>Date</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -35,6 +36,7 @@
         <td><%= consignment.customer.address3 %></td>
         <td><%= consignment.customer.county %></td>
         <td><%= consignment.customer.eircode %></td>
+        <td><%= consignment.created_at.strftime('%d-%m-%Y')%></td>
         <td><%= link_to 'Show', consignment %></td>
         <td><%= link_to 'Edit', edit_consignment_path(consignment) %></td>
         <td><%= link_to 'Destroy', consignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
