@@ -26,8 +26,8 @@
 </p>
 
 <p>
-  <strong>Country:</strong>
-  <%= @customer.country %>
+  <strong>County:</strong>
+  <%= @customer.county %>
 </p>
 
 <p>
@@ -40,15 +40,9 @@
   <%= @customer.user_id %>
 </p>
 
-<p>
-  <strong>Consignment:</strong>
-  <%= @customer.consignment_id %>
-</p>
 
-<p>
-  <strong>Consignments count:</strong>
-  <%= @customer.consignments_count %>
-</p>
+
+
 
 <%= link_to 'Edit', edit_customer_path(@customer) %> |
 <%= link_to 'Back', customers_path %>

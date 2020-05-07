@@ -37,8 +37,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :country %>
-    <%= form.text_field :country %>
+    <%= form.label :county %>
+    <%= form.text_field :county %>
   </div>
 
   <div class="field">
@@ -46,20 +46,14 @@
     <%= form.text_field :eircode %>
   </div>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
+  <div class="field hide">
+        <%= form.label :user_id %>
+        <input type="text" id="user_id" name="customer[user_id]" value="<%= current_user.id %>">
   </div>
 
-  <div class="field">
-    <%= form.label :consignment_id %>
-    <%= form.number_field :consignment_id %>
-  </div>
+ 
 
-  <div class="field">
-    <%= form.label :consignments_count %>
-    <%= form.number_field :consignments_count %>
-  </div>
+ 
 
   <div class="actions">
     <%= form.submit %>
