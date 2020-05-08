@@ -25,6 +25,10 @@ Rails.application.routes.draw do
 
   get 'search_results', to: 'search#search_results', as: 'search_results'
 
+  get 'search_date', to: 'search#search_date', as: 'search_date'
+
+  get 'search_date_results', to: 'search#search_date_results', as: 'search_date_results'
+
   root 'sessions#welcome'
 
 end

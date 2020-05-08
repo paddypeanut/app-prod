@@ -3,6 +3,26 @@
 		<h1>Search Results</h1>
 		<hr/>
 
+			<br>
+			<p class="">Search by Company Name, Customer Code or by Refence</p><br>
+			
+			<div class="row">
+			<div class="col-sm">
+				<%= form_tag(search_results_path, :method => "get",   
+				    class: 'search-bar') do %>  
+
+				  <div class="input-group"> 
+				    <%= search_field_tag :search, params[:search], placeholder: "Search Jobs", minlength: 3, class: "form-control" %> 
+
+					    <div class="input-group-btn">  
+					      <%= button_tag " ",:id => 'searchBtn',:class => 'btn btn-info glyphicon glyphicon-search',:name => nil%>  
+					    </div> 
+				    <% end %> 
+				  </div> 
+			</div>
+			</div>
+			<br>
+
 		<% if @results.count >= 1 %>
 		<p>Showing Results <strong><%= @results.count %></strong> for <strong><%= @parameter %></strong>
 			<%= render partial: "consignments/consignment-table" %>

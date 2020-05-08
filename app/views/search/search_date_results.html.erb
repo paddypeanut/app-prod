@@ -1,0 +1,41 @@
+<div class="container-fluid">
+	<div class="bg-white content">
+		<h1>Search Results</h1>
+		<hr/>
+		<p>Choose a start date and end date</p>
+		<%= form_tag(search_date_results_path, :method => "get",   
+		          class: 'seach-range') do %> 
+		          <div id="searchRangeBar" class="row">
+		            <div class="col-6 row">
+		              <div class="col-3">
+		                <p>Start Date: </p>
+		              </div>
+		              <div class="col-7">
+		              <%= date_field_tag :startdate, params[:startdate],  class: "form-control" %> 
+		              </div>
+		            </div>
+		            <div class="col-6 row">
+		              <div class="col-3">
+		                <p>End Date:</p>
+		              </div>
+		              <div class="col-7">
+		                <%= date_field_tag :enddate, params[:enddate],  class: "form-control" %>
+		              </div> 
+		              <div class="col-2">
+		                <%= button_tag "Select", :class => 'btn btn-info',:name => nil%> 
+		              </div>
+		            </div>
+		          </div>
+		          <br>
+		          <br>
+		    <% end %> 
+		
+		<% if @results.count >=1 %>
+			<p>Showing <strong><%=@results.count%></strong> results between <strong><%= @startDate.strftime('%d-%m-%Y') %></strong> and <strong><%= @endDate.strftime('%d-%m-%Y')%></strong></p>
+			<br>
+			<%= render partial: "consignments/consignment-table" %>
+		<% else %>
+			<p>No Results found</p>
+		<% end %>
+	</div>
+</div>
