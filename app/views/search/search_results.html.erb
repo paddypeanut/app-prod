@@ -1,0 +1,13 @@
+<div class="container-fluid">
+	<div class="bg-white content">
+		<h1>Search Results</h1>
+		<hr/>
+
+		<% if @results.count >= 1 %>
+		<p>Showing Results <strong><%= @results.count %></strong> for <strong><%= @parameter %></strong>
+			<%= render partial: "consignments/consignment-table" %>
+		<% else %>
+			<p>No Results Found</p>
+		<% end %>
+	</div>
+</div>

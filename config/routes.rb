@@ -21,6 +21,10 @@ Rails.application.routes.draw do
 
   get 'consignmentsthismonth', to: 'consignment_period#monthly', as: 'monthly_consignments'
 
+  get 'search', to:'search#search', as: 'search'
+
+  get 'search_results', to: 'search#search_results', as: 'search_results'
+
   root 'sessions#welcome'
 
 end

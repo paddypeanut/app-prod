@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <% options = options_from_collection_for_select(@customers, 'company_name', 'company_name') %>
+  <% options = options_from_collection_for_select(@customers, 'customer_code', 'customer_code') %>
       <%= form.select:company_code, options %>
       <br>
       <br>

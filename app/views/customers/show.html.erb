@@ -76,7 +76,7 @@ var chart = new Chart(monthChart, {
     data: {
         labels: [
           <% @byMonth.each do |a|%>
-              '<%= a[0].strftime('%B') %>',
+              '<%= a[0].strftime('%B-%y') %>',
             <% end %>
         ],
         datasets: [{
