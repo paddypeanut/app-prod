@@ -20,13 +20,67 @@
 			</div>
 
 			<div class="col">
-				three
+				<canvas id="bar-chart">
+				</canvas>
 			</div>
 		</div>
 	</div>
 </div>
 
 <script>
+	var ctx = document.getElementById('bar-chart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: [
+          <% @weekByDay.each do |a|%>
+              '<%= a[0].to_date.strftime('%A') %>',
+            <% end %>
+        ],
+        datasets: [{
+            label: 'Consignments',
+           	backgroundColor: ['rgb(236, 219, 83)',
+                              'rgb(227,65,50)',
+                              'rgb(108,160,220)',
+                              'rgb(147,71,66)',
+                              'rgb(219,178,209)',
+                              'rgb(235,150,135)',
+                              'rgb(0,166,140)',
+                              'rgb(100,83,148)',
+                              'rgb(108,79,60)',
+                              'rgb(235,225,223)',
+                              'rgb(188,108,167)',
+                              'rgb(191,216,51)'],
+            borderColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [
+            <% @weekByDay.each do |a|%>
+              <%= a[1] %>,
+            <% end %>
+            ],
+            
+        }]
+
+    },
+
+    // Configuration options go here
+    options: {
+      scales:{
+        yAxes:[{
+          display:true,
+          ticks:{
+            suggestedMin:0,
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+});
+
+
 		var weekDoh = document.getElementById('doh-chart').getContext('2d');
 		var newChart = new Chart(weekDoh, {
 		type: 'doughnut',
