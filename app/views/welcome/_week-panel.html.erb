@@ -5,10 +5,16 @@
 		<div class="row">
 			<div class="col">
 				<table>
+					<tr>
+						<td>Day</td>
+						<td>Consignments</td>
+					
+					</tr>
 				<% @weekByDay.each do |x| %>
 					<tr>
-						<td><%= x[0]%></td>
-						<td><%= x[1]%></td>
+						<td><%= x[0].strftime('%A')%></td>
+						<td class="center-content"><%= x[1]%></td>
+						
 					</tr>
 				<% end %>
 				</table>

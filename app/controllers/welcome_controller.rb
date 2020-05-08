@@ -26,6 +26,7 @@ class WelcomeController < ApplicationController
 		@monthEnd = @monthStart.end_of_month
 		@monthRange = @monthStart..@monthEnd
 		@monthConsignments = @consignments.where('consignments.created_at' => @monthRange)
+		@monthByDay = @monthConsignments.group_by_day('consignments.created_at').count
 		@monthBreakdown = @monthConsignments.pluck('count(consignments.created_at)','sum(consignments.parcels)','sum(consignments.pallets)','sum(consignments.bundles)')
 
 

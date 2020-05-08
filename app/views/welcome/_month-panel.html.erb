@@ -1,0 +1,57 @@
+<div class="container-fluid">
+	<div class="bg-white content">
+		<h2>Consignments added this month</h2>
+		<hr/>
+		<div class="row">
+			<div class="col-4">
+				<%= @monthConsignments.inspect %>
+			</div>
+			<div class="col-8">
+				<canvas id="line-chart">
+				</canvas>
+			</div>
+	</div>
+</div>
+
+<script>
+var monthChart = document.getElementById('line-chart').getContext('2d');
+var chart = new Chart(monthChart, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: [
+          <% @monthByDay.each do |a|%>
+              '<%= a[0].strftime('%d/%m') %>',
+            <% end %>
+        ],
+        datasets: [{
+            label: 'Consignments',
+            backgroundColor: 'rgb(3, 161, 252)',
+            borderColor: 'rgb(3, 161, 252)',
+            fill: false,
+            data: [
+            <% @monthByDay.each do |a|%>
+              <%= a[1] %>,
+            <% end %>
+            ],
+            
+        }]
+
+    },
+
+    // Configuration options go here
+    options: {
+      scales:{
+        yAxes:[{
+          display:true,
+          ticks:{
+            suggestedMin:0,
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+});
+  </script>
