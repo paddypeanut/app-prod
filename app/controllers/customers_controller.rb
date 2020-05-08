@@ -16,6 +16,9 @@ class CustomersController < ApplicationController
     @consignments = Consignment.all
     @customerConsignments = @consignments.joins(:customer).includes(:user).where(user: session[:user_id]).order('consignments.created_at DESC')
     @results = @customerConsignments.where("consignments.customer_id" => @customer.id)
+    @byMonth = Consignment.all.where(customer_id: @customer.id).group_by_month(:created_at).count
+    @breakDown = Consignment.all.where(customer_id: @customer.id).group_by_month(:created_at).pluck('sum(consignments.parcels)', 'sum(consignments.pallets)', 'sum(consignments.bundles)', 'count(consignments.created_at)')
+
   end
 
   # GET /customers/new
