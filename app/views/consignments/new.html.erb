@@ -1,6 +1,10 @@
-<h1>New Consignment</h1>
-<%= @customers.inspect %>
+<div class="container-fluid">
+  <div class="bg-white content">
+		<h1>New Consignment</h1>
+		<hr/>
 
-<%= render 'form', consignment: @consignment %>
+		<%= render 'form', consignment: @consignment %>
 
-<%= link_to 'Back', consignments_path %>
+		<%= link_to 'Back', consignments_path %>
+	</div>
+</div>

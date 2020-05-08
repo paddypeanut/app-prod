@@ -1,6 +1,10 @@
-<h1>Editing Consignment</h1>
+<div class="container-fluid">
+  <div class="bg-white content">
+		<h1>Editing Consignment</h1>
+		<hr/>
+		<%= render 'form', consignment: @consignment %>
 
-<%= render 'form', consignment: @consignment %>
-
-<%= link_to 'Show', @consignment %> |
-<%= link_to 'Back', consignments_path %>
+		<%= link_to 'Show', @consignment %> |
+		<%= link_to 'Back', consignments_path %>
+	</div>
+</div>

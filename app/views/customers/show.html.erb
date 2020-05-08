@@ -1,48 +1,53 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
+  <div class="bg-white content">
+    <p id="notice"><%= notice %></p>
+    <h1>Customers</h1>
+    <hr/>
+    <p>
+      <strong>Customer code:</strong>
+      <%= @customer.customer_code %>
+    </p>
 
-<p>
-  <strong>Customer code:</strong>
-  <%= @customer.customer_code %>
-</p>
+    <p>
+      <strong>Company name:</strong>
+      <%= @customer.company_name %>
+    </p>
 
-<p>
-  <strong>Company name:</strong>
-  <%= @customer.company_name %>
-</p>
+    <p>
+      <strong>Address1:</strong>
+      <%= @customer.address1 %>
+    </p>
 
-<p>
-  <strong>Address1:</strong>
-  <%= @customer.address1 %>
-</p>
+    <p>
+      <strong>Address2:</strong>
+      <%= @customer.address2 %>
+    </p>
 
-<p>
-  <strong>Address2:</strong>
-  <%= @customer.address2 %>
-</p>
+    <p>
+      <strong>Address3:</strong>
+      <%= @customer.address3 %>
+    </p>
 
-<p>
-  <strong>Address3:</strong>
-  <%= @customer.address3 %>
-</p>
+    <p>
+      <strong>County:</strong>
+      <%= @customer.county %>
+    </p>
 
-<p>
-  <strong>County:</strong>
-  <%= @customer.county %>
-</p>
+    <p>
+      <strong>Eircode:</strong>
+      <%= @customer.eircode %>
+    </p>
 
-<p>
-  <strong>Eircode:</strong>
-  <%= @customer.eircode %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @customer.user_id %>
-</p>
+    <p>
+      <strong>User:</strong>
+      <%= @customer.user_id %>
+    </p>
 
 
 
 
 
-<%= link_to 'Edit', edit_customer_path(@customer) %> |
-<%= link_to 'Back', customers_path %>
+    <%= link_to 'Edit', edit_customer_path(@customer) %> |
+    <%= link_to 'Back', customers_path %>
+  </div>
+</div>

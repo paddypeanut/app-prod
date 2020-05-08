@@ -18,7 +18,7 @@ body {
 	background:#00A6FB;
 	font-family:'Manrope', sans-serif;
 }
-
+//Side bar and Content Styles//
  .wrapper {
  	display:flex;
  	align-items:strecth;
@@ -44,7 +44,6 @@ body {
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
 }
 
 #sidebar ul p {
@@ -102,6 +101,13 @@ ul ul a {
  	right:20px;
  	transform:translateY(-50%);
  }
+
+ .content {
+    border-radius:20px;
+    padding:20px;
+ }
+//End Side Bar and Content Styles//
+
 
 
  @media (max-width: 768px) {

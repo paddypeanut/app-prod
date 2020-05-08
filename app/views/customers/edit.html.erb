@@ -1,6 +1,10 @@
-<h1>Editing Customer</h1>
+<div class="container-fluid">
+  <div class="bg-white content">
+		<h1>Editing Customer</h1>
+		<hr/>
+		<%= render 'form', customer: @customer %>
 
-<%= render 'form', customer: @customer %>
-
-<%= link_to 'Show', @customer %> |
-<%= link_to 'Back', customers_path %>
+		<%= link_to 'Show', @customer %> |
+		<%= link_to 'Back', customers_path %>
+	</div>
+</div>
