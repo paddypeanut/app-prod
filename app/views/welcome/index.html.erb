@@ -1,5 +1,9 @@
 <div class="container-fluid">
-  	<div class="bg-white content">
-		<h1>welcome</h1>
-	</div>
+
+		<h1 class="heading-white">Welcome <%= current_user.username %></h1>
+
+
+	<%= render partial: "welcome/top-panels"%>
+
+
 </div>

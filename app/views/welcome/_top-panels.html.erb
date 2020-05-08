@@ -1,0 +1,52 @@
+<div id="home-4-panel" class="row">
+		<div class="col bg-white content panel-content">
+			<h2>Today</h2>
+			<hr/>
+
+				<ul>
+					<%  @todayBreakdown.each do |job| %>
+					<li>Consignments: <%= job[0] %></li>
+					<li>Parcels: <%= job[1] %></li>
+					<li>Pallets: <%= job[2] %></li>
+					<li>Bundles: <%= job[3] %></li>
+					<% end %>
+				</ul>
+			
+		</div>
+		<div class="col bg-white content panel-content">
+			<h2>Yesterday</h2>
+			<hr/>
+				<ul>
+					<%  @yesterdayBreakdown.each do |job| %>
+					<li>Consignments: <%= job[0] %></li>
+					<li>Parcels: <%= job[1] %></li>
+					<li>Pallets: <%= job[2] %></li>
+					<li>Bundles: <%= job[3] %></li>
+					<% end %>
+				</ul>
+		</div>
+		<div class="col bg-white content panel-content">
+			<h2>This Week</h2>
+			<hr/>
+				<ul>
+					<%  @weekBreakdown.each do |job| %>
+					<li>Consignments: <%= job[0] %></li>
+					<li>Parcels: <%= job[1] %></li>
+					<li>Pallets: <%= job[2] %></li>
+					<li>Bundles: <%= job[3] %></li>
+					<% end %>
+				</ul>
+		</div>
+		<div class="col bg-white content panel-content">
+			<h2>This Month</h2>
+			<hr/>
+				<ul>
+					<%  @monthBreakdown.each do |job| %>
+					<li>Consignments: <%= job[0] %></li>
+					<li>Parcels: <%= job[1] %></li>
+					<li>Pallets: <%= job[2] %></li>
+					<li>Bundles: <%= job[3] %></li>
+					<% end %>
+				</ul>
+		</div>
+	</div>
