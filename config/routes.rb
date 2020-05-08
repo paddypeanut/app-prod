@@ -31,4 +31,6 @@ Rails.application.routes.draw do
 
   root 'sessions#welcome'
 
+  delete 'logout'  => 'sessions#destroy'
+
 end

@@ -15,4 +15,9 @@ def create
 end
 def page_requires_login
 end
+
+def destroy
+	log_out
+	redirect_to sessions_welcome_path
+end
 end
