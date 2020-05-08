@@ -1,0 +1,41 @@
+<nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Menu</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            
+            <li>
+                <a href="/welcome">Dashboard</a>
+            </li>
+            <li class="active">
+                <a href="#homeSubmenu" data-toggle="collapse" class="dropdown-toggle">Consignments</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                        <%= link_to 'All Consignments', consignments_path %>
+                    </li>
+                    <li>
+                        <%= link_to 'Add Consignments', new_consignment_path %>
+                    </li>
+                    <li>
+                        <a href="#">Home 3</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Customers</a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <li>
+                        <%= link_to 'Address Book', customers_path %>
+                    </li>
+                    <li>
+                        <%= link_to 'New Customets', new_customer_path %>
+                    </li>
+                    
+                </ul>
+            </li>
+            <li>
+                <a href="#">Logout</a>
+            </li>
+        </ul>
+    </nav>
