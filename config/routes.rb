@@ -29,6 +29,8 @@ Rails.application.routes.draw do
 
   get 'search_date_results', to: 'search#search_date_results', as: 'search_date_results'
 
+  get 'show_panel' ,to: 'consignments#show_panel', as: 'show_panel'
+
   root 'sessions#welcome'
 
   delete 'logout'  => 'sessions#destroy'

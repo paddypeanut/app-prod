@@ -1,6 +1,6 @@
 <div id="home-4-panel" class="row">
 		<div class="col bg-white content panel-content">
-			<h2>Today</h2>
+			<h2><%= link_to 'Today' , show_panel_path(:filter =>"Today")%></h2>
 			<hr/>
 
 				<ul>
@@ -14,7 +14,7 @@
 			
 		</div>
 		<div class="col bg-white content panel-content">
-			<h2>Yesterday</h2>
+			<h2><%= link_to 'Yesterday' , show_panel_path(:filter =>"Yesterday")%></h2>
 			<hr/>
 				<ul>
 					<%  @yesterdayBreakdown.each do |job| %>
@@ -26,7 +26,7 @@
 				</ul>
 		</div>
 		<div class="col bg-white content panel-content">
-			<h2>This Week</h2>
+			<h2><%= link_to 'Week' , show_panel_path(:filter =>"Week")%></h2>
 			<hr/>
 				<ul>
 					<%  @weekBreakdown.each do |job| %>
@@ -38,7 +38,7 @@
 				</ul>
 		</div>
 		<div class="col bg-white content panel-content">
-			<h2>This Month</h2>
+			<h2><%= link_to 'Month' , show_panel_path(:filter =>"Month")%></h2>
 			<hr/>
 				<ul>
 					<%  @monthBreakdown.each do |job| %>

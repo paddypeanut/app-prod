@@ -19,6 +19,32 @@ class ConsignmentsController < ApplicationController
     @customers = Customer.joins(:user).where(user: session[:user_id])
   end
 
+
+  def show_panel
+    @consignments = Consignment.all
+    @userConsignments = @consignments.joins(:customer).includes(:user).where(user: session[:user_id]).order('consignments.created_at DESC')
+  
+    if params[:filter] == 'Today'
+        @startDate = Date.today.beginning_of_day
+        @endDate = @startDate.end_of_day 
+        @heading = "today"
+      elsif params[:filter] == 'Yesterday'
+        @startDate = Date.today.beginning_of_day - 1
+        @endDate = @startDate.end_of_day
+        @heading = "yesterday"
+      elsif params[:filter] == 'Week'
+        @startDate = Date.today.beginning_of_week
+        @endDate = @startDate.end_of_week
+        @heading = "this week"
+      elsif params[:filter] == 'Month'
+        @startDate = Date.today.beginning_of_month
+        @endDate = Date.today.end_of_month
+        @heading = "this month"
+    end
+    @range = @startDate..@endDate
+    @results = @userConsignments.where('consignments.created_at' => @range)
+  end
+
   # GET /consignments/1/edit
   def edit
   end
