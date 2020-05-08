@@ -1,0 +1,2 @@
+module ConsignmentPeriodHelper
+end

@@ -15,6 +15,12 @@ Rails.application.routes.draw do
 
   get 'authorized', to: 'sessions#page_requires_login'
 
+  get 'consignmentstoday', to: 'consignment_period#daily', as: 'daily_consignments'
+
+  get 'consignmentsthisweek', to: 'consignment_period#weekly', as: 'weekly_consignments'
+
+  get 'consignmentsthismonth', to: 'consignment_period#monthly', as: 'monthly_consignments'
+
   root 'sessions#welcome'
 
 end
