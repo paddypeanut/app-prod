@@ -1,6 +1,11 @@
 <div class="container-fluid">
 	<div class="bg-white content">
 		<h1>Consignments added this week</h1>
+		<% if @results.count >= 1 %>
 		<%= render partial: "consignments/consignment-table"%>
+		<% else %>
+			<h3>No Consignments this week</h3>
+		<% end %>
+		
 	</div>
 </div>
