@@ -19,6 +19,8 @@ class WelcomeController < ApplicationController
 		@weekRange = @weekStart..@weekEnd
 		@weekConsignments = @consignments.where('consignments.created_at' => @weekRange)
 		@weekBreakdown = @weekConsignments.pluck('count(consignments.created_at)','sum(consignments.parcels)','sum(consignments.pallets)','sum(consignments.bundles)')
+		@weekByDay = @weekConsignments.group_by_day('consignments.created_at').count
+
 
 		@monthStart = @today.beginning_of_month
 		@monthEnd = @monthStart.end_of_month

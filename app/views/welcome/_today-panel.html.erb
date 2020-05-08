@@ -1,0 +1,8 @@
+<div class="container-fluid">
+	<div class="bg-white content">
+		<h2>Consignments added today</h2>
+		<hr>
+		<% @results = @todayConsignments %>
+		<%= render partial: "consignments/consignment-table"%>
+	</div>
+</div>

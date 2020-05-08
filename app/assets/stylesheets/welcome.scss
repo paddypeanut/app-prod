@@ -3,7 +3,14 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .panel-content {
-    margin:15px;
+    margin:15px !important;
+}
+
+.panel-content:first-child{
+	margin-left:30px !important;
+}
+.panel-content:last-child{
+	margin-right:30px !important;
 }
 
 .panel-content ul {
@@ -14,5 +21,13 @@
 
 .heading-white {
 	color:white;
+}
+
+#t-1 {
+	float:left;
+}
+
+#t-2 {
+	float:left;
 }
 

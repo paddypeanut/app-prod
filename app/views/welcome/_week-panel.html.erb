@@ -1,0 +1,69 @@
+<div class="container-fluid">
+	<div class="bg-white content">
+		<h2>Consignments added thie week</h2>
+		<hr>
+		<div class="row">
+			<div class="col">
+				<table>
+				<% @weekByDay.each do |x| %>
+					<tr>
+						<td><%= x[0]%></td>
+						<td><%= x[1]%></td>
+					</tr>
+				<% end %>
+				</table>
+			</div>
+
+			<div class="col">
+				<canvas id="doh-chart">
+				</canvas>
+			</div>
+
+			<div class="col">
+				three
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+		var weekDoh = document.getElementById('doh-chart').getContext('2d');
+		var newChart = new Chart(weekDoh, {
+		type: 'doughnut',
+	
+			data: {
+				datasets: [{
+					data: [
+						<% @weekBreakdown.each do |x|%>
+							<%= x[1] %>,<%=x[1]%>,<%=x[2]%>
+						<%end%>
+					],
+					backgroundColor: [
+						'rgb(255, 159, 64)',
+						'rgb(255, 205, 86)',
+						'rgb(54, 162, 235)'
+					],
+					label: 'Dataset 1'
+				}],
+				labels: [
+					'Parcels','Pallets','Bundles'
+				]
+			},
+			options: {
+				responsive: true,
+				legend: {
+					position: 'top',
+				},
+				/*title: {
+					display: true,
+					text: 'Total Pieces'
+				},*/
+				animation: {
+					animateScale: true,
+					animateRotate: true
+				}
+			}
+		});
+
+		
+  </script>
