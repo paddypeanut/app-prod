@@ -29,7 +29,7 @@ class ConsignmentsController < ApplicationController
         @endDate = @startDate.end_of_day 
         @heading = "today"
       elsif params[:filter] == 'Yesterday'
-        @startDate = Date.today.beginning_of_day - 1
+        @startDate = Date.today.beginning_of_day - 1.day
         @endDate = @startDate.end_of_day
         @heading = "yesterday"
       elsif params[:filter] == 'Week'
