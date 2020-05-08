@@ -3,49 +3,58 @@
     <p id="notice"><%= notice %></p>
     <h1>Customers</h1>
     <hr/>
-    <p>
-      <strong>Customer code:</strong>
-      <%= @customer.customer_code %>
-    </p>
 
-    <p>
-      <strong>Company name:</strong>
-      <%= @customer.company_name %>
-    </p>
+    <div class="row">
+      <div class="col">
+        <p>
+          <strong>Customer code:</strong>
+          <%= @customer.customer_code %>
+        </p>
 
-    <p>
-      <strong>Address1:</strong>
-      <%= @customer.address1 %>
-    </p>
+        <p>
+          <strong>Company name:</strong>
+          <%= @customer.company_name %>
+        </p>
 
-    <p>
-      <strong>Address2:</strong>
-      <%= @customer.address2 %>
-    </p>
+        <p>
+          <strong>Address1:</strong>
+          <%= @customer.address1 %>
+        </p>
 
-    <p>
-      <strong>Address3:</strong>
-      <%= @customer.address3 %>
-    </p>
+        <p>
+          <strong>Address2:</strong>
+          <%= @customer.address2 %>
+        </p>
 
-    <p>
-      <strong>County:</strong>
-      <%= @customer.county %>
-    </p>
+        <p>
+          <strong>Address3:</strong>
+          <%= @customer.address3 %>
+        </p>
 
-    <p>
-      <strong>Eircode:</strong>
-      <%= @customer.eircode %>
-    </p>
+        <p>
+          <strong>County:</strong>
+          <%= @customer.county %>
+        </p>
 
-    <p>
-      <strong>User:</strong>
-      <%= @customer.user_id %>
-    </p>
+        <p>
+          <strong>Eircode:</strong>
+          <%= @customer.eircode %>
+        </p>
 
-    <%=@breakDown.inspect%>
-    <br>
-    <%=@byMonth.inspect %>
+        <p>
+          <strong>User:</strong>
+          <%= @customer.user_id %>
+        </p>
+      </div>
+
+    
+      <div class="col">
+        <div>
+          <canvas id="chart1">
+          </canvas>
+        </div>
+      </div>
+    </div>
     
     <br>
     <%= render partial: "consignments/consignment-table" %>
@@ -56,3 +65,56 @@
     <%= link_to 'Back', customers_path %>
   </div>
 </div>
+
+<script>
+var monthChart = document.getElementById('chart1').getContext('2d');
+var chart = new Chart(monthChart, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: [
+          <% @byMonth.each do |a|%>
+              '<%= a[0].strftime('%B') %>',
+            <% end %>
+        ],
+        datasets: [{
+            label: 'Consignments',
+            backgroundColor: ['rgb(236, 219, 83)',
+                              'rgb(227,65,50)',
+                              'rgb(108,160,220)',
+                              'rgb(147,71,66)',
+                              'rgb(219,178,209)',
+                              'rgb(235,150,135)',
+                              'rgb(0,166,140)',
+                              'rgb(100,83,148)',
+                              'rgb(108,79,60)',
+                              'rgb(235,225,223)',
+                              'rgb(188,108,167)',
+                              'rgb(191,216,51)'],
+            borderColor: 'rgb(255, 99, 132)',
+            data: [
+            <% @byMonth.each do |a|%>
+              '<%= a[1] %>',
+            <% end %>
+            ],
+            
+        }]
+
+    },
+
+    // Configuration options go here
+    options: {
+      scales:{
+        yAxes:[{
+          display:true,
+          ticks:{
+            suggestedMin:0,
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+});
+  </script>
