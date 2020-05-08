@@ -35,6 +35,18 @@
                 </ul>
             </li>
             <li>
+                <a href="#searchSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Search</a>
+                <ul class="collapse list-unstyled" id="searchSubmenu">
+                    <li>
+                        <%= link_to 'By Keyword', search_path %>
+                    </li>
+                    <li>
+                        <%= link_to 'By Date', search_date_path %>
+                    </li>
+                    
+                </ul>
+            </li>
+            <li>
                 <a href="#">Logout</a>
             </li>
         </ul>
