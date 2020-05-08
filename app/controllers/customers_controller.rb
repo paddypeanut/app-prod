@@ -13,6 +13,9 @@ class CustomersController < ApplicationController
   # GET /customers/1
   # GET /customers/1.json
   def show
+    @consignments = Consignment.all
+    @customerConsignments = @consignments.joins(:customer).includes(:user).where(user: session[:user_id]).order('consignments.created_at DESC')
+    @results = @customerConsignments.where("consignments.customer_id" => @customer.id)
   end
 
   # GET /customers/new
