@@ -109,6 +109,10 @@ ul ul a {
  }
 //End Side Bar and Content Styles//
 
+.content a ,.content a:visited{
+    color:#007bff !important;
+}
+
 
 
  @media (max-width: 768px) {
