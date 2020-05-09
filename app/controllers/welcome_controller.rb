@@ -20,7 +20,14 @@ class WelcomeController < ApplicationController
 		@weekConsignments = @userConsignments.where('consignments.created_at' => @weekRange)
 		@weekBreakdown = @weekConsignments.pluck('count(consignments.created_at)','sum(consignments.parcels)','sum(consignments.pallets)','sum(consignments.bundles)')
 		@weekByDay = @weekConsignments.group_by_day('consignments.created_at').count
-
+		@weekQuery = @weekConsignments.connection.select_all("SELECT
+				DATE(created_at), SUM(parcels) ,SUM(pallets), SUM(bundles),COUNT(created_at)
+				FROM consignments
+				WHERE created_at BETWEEN '#{@weekStart}' AND '#{@weekEnd}'
+				AND user_id = #{current_user.id}
+				GROUP BY DATE(created_at)
+				ORDER BY DATE(created_at) ASC")
+		@weekFull = @weekQuery.rows
 
 		@monthStart = @today.beginning_of_month
 		@monthEnd = @monthStart.end_of_month

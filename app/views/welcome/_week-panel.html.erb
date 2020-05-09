@@ -2,18 +2,25 @@
 	<div class="bg-white content">
 		<h2>Consignments added thie week</h2>
 		<hr>
+
 		<div class="row">
 			<div class="col">
-				<table>
+				<table class="table table-striped">
 					<tr>
 						<td>Day</td>
 						<td>Consignments</td>
+						<td>Parcels</td>
+						<td>Pallets</td>
+						<td>Bundles</td>
 					
 					</tr>
-				<% @weekByDay.each do |x| %>
+				<% @weekFull.each do |x| %>
 					<tr>
-						<td><%= x[0].strftime('%A')%></td>
+						<td><%= x[0].to_date.strftime('%A')%></td>
+						<td class="center-content"><%= x[4]%></td>
 						<td class="center-content"><%= x[1]%></td>
+						<td class="center-content"><%= x[2]%></td>
+						<td class="center-content"><%= x[3]%></td>
 						
 					</tr>
 				<% end %>
