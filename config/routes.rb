@@ -31,6 +31,8 @@ Rails.application.routes.draw do
 
   get 'show_panel' ,to: 'consignments#show_panel', as: 'show_panel'
 
+  get 'by_date', to:'consignments#by_date', as: 'by_date'
+
   root 'sessions#welcome'
 
   delete 'logout'  => 'sessions#destroy'

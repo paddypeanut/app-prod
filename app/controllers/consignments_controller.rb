@@ -45,6 +45,15 @@ class ConsignmentsController < ApplicationController
     @results = @userConsignments.where('consignments.created_at' => @range)
   end
 
+  def by_date 
+    @consignments = Consignment.all
+    @userConsignments = @consignments.joins(:customer).includes(:user).where(user: session[:user_id]).order('consignments.created_at DESC')
+    @startDate = params[:startdate].to_date
+    @endDate = params[:enddate].to_date
+    @range = @startDate.beginning_of_day..@endDate.end_of_day
+    @results = @userConsignments.where('consignments.created_at' => @range)
+  end
+
   # GET /consignments/1/edit
   def edit
   end

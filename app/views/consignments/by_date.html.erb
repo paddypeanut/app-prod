@@ -1,0 +1,9 @@
+<div class="container-fluid">
+	<div class="bg-white content">
+		<h1>Consignments added <%= @startDate.strftime('%A, %d %B %Y')%></h1>
+		<hr/>
+		
+		<%= render partial: 'consignments/consignment-table'%>
+
+	</div>
+</div>
