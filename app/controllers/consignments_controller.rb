@@ -25,6 +25,7 @@ class ConsignmentsController < ApplicationController
     @userConsignments = @consignments.joins(:customer).includes(:user).where(user: session[:user_id]).order('consignments.created_at DESC')
   
     if params[:filter] == 'Today'
+        @params = 'Today'
         @startDate = Date.today.beginning_of_day
         @endDate = @startDate.end_of_day 
         @heading = "today"
@@ -43,6 +44,18 @@ class ConsignmentsController < ApplicationController
     end
     @range = @startDate..@endDate
     @results = @userConsignments.where('consignments.created_at' => @range)
+
+
+    @test = @userConsignments.connection.select_all("SELECT
+        DATE(created_at), SUM(parcels) ,SUM(pallets), SUM(bundles),COUNT(created_at)
+        FROM consignments
+        WHERE created_at BETWEEN '#{@startDate}' AND '#{@endDate}'
+        AND user_id = #{current_user.id}
+        GROUP BY DATE(created_at)
+        ORDER BY DATE(created_at) ASC")
+    @test2 = @test.rows
+
+    
   end
 
   def by_date 
