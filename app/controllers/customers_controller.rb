@@ -20,7 +20,7 @@ class CustomersController < ApplicationController
     @breakDown = Consignment.all.where(customer_id: @customer.id).group_by_month(:created_at).pluck('sum(consignments.parcels)', 'sum(consignments.pallets)', 'sum(consignments.bundles)','count(consignments.created_at)')
 
     @customer = Customer.find(params[:id])
-    @test = @customerConsignments.connection.select_all("SELECT to_char(created_at,'mon') as mon,
+    @test = @customerConsignments.connection.select_all("SELECT to_char(created_at,'Mon') as mon,
                                                           extract('year' from created_at) as Year,
                                                           count(created_at) as consignments,
                                                           sum(parcels) as parcels,
@@ -35,15 +35,27 @@ class CustomersController < ApplicationController
   end
 
   def customerByMonth
+    @customer = Customer.find(params[:id])
     @month = params[:month]
     @year = params[:year]
     @customerId = params[:id]
     @fullDate = @month + ' '+ @year
-    @range = @fullDate.to_date.beginning_of_month..@fullDate.to_date.end_of_month
+    @startDate = @fullDate.to_date.beginning_of_month
+    @endDate = @fullDate.to_date.end_of_month
+    @range = @startDate..@endDate
     @consignments = Consignment.all
     @userConsignments = @consignments.joins(:customer).includes(:user).where(user: session[:user_id]).order('consignments.created_at DESC')
     @customerConsignments = @userConsignments.where("consignments.customer_id" => @customerId)
     @results = @customerConsignments.where('consignments.created_at' => @range)
+    @monthQuery = @results.connection.select_all("SELECT
+        DATE(created_at), SUM(parcels) ,SUM(pallets), SUM(bundles),COUNT(created_at)
+        FROM consignments
+        WHERE created_at BETWEEN '#{@startDate}' AND '#{@endDate}'
+        AND user_id = #{current_user.id}
+        AND customer_id = #{@customer.id}
+        GROUP BY DATE(created_at)
+        ORDER BY DATE(created_at) ASC")
+    @eachMonth = @monthQuery.rows
 
   end
 

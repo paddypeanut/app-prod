@@ -1,18 +1,126 @@
 <div class="container-fluid">
 	<div class="bg-white content">
-		<h1>By Month</h1>
+		<h1><%= @customer.company_name %> - <%=@month%> - <%=@year%></h1>
 		<hr/>
-		<%= @customerId.inspect %>
-		<br>
-		<%= @month.inspect %>
-		<br>
-		<%= @year.inspect %>
-		<br>
-		<%= @fullDate.to_date %>
-		<br>
-		<%= @range.inspect %>
-		<br>
-		<%= @results.inspect %>
+		<div class="row">
+			<div class="col">
+				<table class="table table-striped">
+			          <tr>
+			            <td>Date</td>
+			            <td>Consignments</td>
+			            <td>Parcels</td>
+			            <td>Pallets</td>
+			            <td>Bundles</td>
+			          </tr>
+			        <% @eachMonth.each do |x| %>
+			          <tr>
+			            <td><%= link_to x[0].to_date.strftime('%a, %d %B'), by_date_path(:startdate =>x[0],:enddate => x[0]) %></td>
+			            <td class="center-content"><%= x[4]%></td>
+			            <td class="center-content"><%= x[1]%></td>
+			            <td class="center-content"><%= x[2]%></td>
+			            <td class="center-content"><%= x[3]%></td>
+			            
+			          </tr>
+			        <% end %>
+			        <tr>
+			        	<td>Total</td>
+			        	<td class="center-content"><%=@results.count%></td>
+			        	<td class="center-content"><%=@results.sum(:parcels)%></td>
+			        	<td class="center-content"><%=@results.sum(:pallets)%></td>
+			        	<td class="center-content"><%=@results.sum(:bundles)%></td>
+			        </tr>
+			    </table>
+			</div>
+			<div class="col">
+				<canvas id="pie-chart">
+				</canvas>
+			</div>
+			<div class="col">
+				<canvas id="line-chart">
+				</canvas>
+			</div>
+		</div>
+
 		<%= render partial: 'consignments/consignment-table'%>
+
 	</div>
 </div>
+
+<script>
+var monthChart = document.getElementById('line-chart').getContext('2d');
+var chart = new Chart(monthChart, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: [
+          <% @eachMonth.each do |a|%>
+              '<%= a[0].to_date.strftime("%d/%m") %>',
+            <% end %>
+        ],
+        datasets: [{
+            label: 'Consignments',
+            backgroundColor: 'rgb(3, 161, 252)',
+            borderColor: 'rgb(3, 161, 252)',
+            fill: false,
+            data: [
+            <% @eachMonth.each do |a|%>
+              <%= a[4] %>,
+            <% end %>
+            ],
+            
+        }]
+
+    },
+
+    // Configuration options go here
+    options: {
+      scales:{
+        yAxes:[{
+          display:true,
+          ticks:{
+            suggestedMin:0,
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+});
+
+var weekDoh = document.getElementById('pie-chart').getContext('2d');
+		var newChart = new Chart(weekDoh, {
+		type: 'doughnut',
+	
+			data: {
+				datasets: [{
+					data: [
+						<%= @results.sum(:parcels)%>,<%= @results.sum(:pallets)%>,<%= @results.sum(:bundles)%>
+					],
+					backgroundColor: [
+						'rgb(255, 159, 64)',
+						'rgb(255, 205, 86)',
+						'rgb(54, 162, 235)'
+					],
+					label: 'Dataset 1'
+				}],
+				labels: [
+					'Parcels','Pallets','Bundles'
+				]
+			},
+			options: {
+				responsive: true,
+				legend: {
+					position: 'top',
+				},
+				/*title: {
+					display: true,
+					text: 'Total Pieces'
+				},*/
+				animation: {
+					animateScale: true,
+					animateRotate: true
+				}
+			}
+		});
+  </script>
