@@ -31,7 +31,7 @@
         <td><%= consignment.customer.address3 %></td>
         <td><%= consignment.customer.county %></td>
         <td><%= consignment.customer.eircode %></td>
-        <td><%= consignment.created_at.strftime('%d-%m-%Y')%></td>
+        <td><%= link_to consignment.created_at.strftime('%d-%m-%Y'), by_date_path(:startdate => consignment.created_at, :enddate => consignment.created_at)%></td>
         <td><%= link_to 'Show', consignment %></td>
         <td><%= link_to 'Edit', edit_consignment_path(consignment) %></td>
         <td><%= link_to 'Destroy', consignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -35,6 +35,14 @@ class WelcomeController < ApplicationController
 		@monthConsignments = @userConsignments.where('consignments.created_at' => @monthRange)
 		@monthByDay = @monthConsignments.group_by_day('consignments.created_at').count
 		@monthBreakdown = @monthConsignments.pluck('count(consignments.created_at)','sum(consignments.parcels)','sum(consignments.pallets)','sum(consignments.bundles)')
+		@monthQuery = @monthConsignments.connection.select_all("SELECT
+				DATE(created_at), SUM(parcels) ,SUM(pallets), SUM(bundles),COUNT(created_at)
+				FROM consignments
+				WHERE created_at BETWEEN '#{@monthStart}' AND '#{@monthEnd}'
+				AND user_id = #{current_user.id}
+				GROUP BY DATE(created_at)
+				ORDER BY DATE(created_at) ASC")
+		@monthFull = @monthQuery.rows
 
 
 	end
