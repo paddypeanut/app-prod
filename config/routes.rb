@@ -33,6 +33,8 @@ Rails.application.routes.draw do
 
   get 'by_date', to:'consignments#by_date', as: 'by_date'
 
+  get 'customerByMonth', to: 'customers#customerByMonth', as: 'customerByMonth'
+
   root 'sessions#welcome'
 
   delete 'logout'  => 'sessions#destroy'

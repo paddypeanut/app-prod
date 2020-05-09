@@ -1,0 +1,18 @@
+<div class="container-fluid">
+	<div class="bg-white content">
+		<h1>By Month</h1>
+		<hr/>
+		<%= @customerId.inspect %>
+		<br>
+		<%= @month.inspect %>
+		<br>
+		<%= @year.inspect %>
+		<br>
+		<%= @fullDate.to_date %>
+		<br>
+		<%= @range.inspect %>
+		<br>
+		<%= @results.inspect %>
+		<%= render partial: 'consignments/consignment-table'%>
+	</div>
+</div>

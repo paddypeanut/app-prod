@@ -52,20 +52,20 @@
           <thead>
             <tr>
                 <th>Month</th>
-                <th>Consignments</th>
-                <th>Parcels</th>
-                <th>Pallets</th>
-                <th>Bundles</th>
+                <td class="center-content">Consignments</th>
+                <td class="center-content">Parcels</th>
+                <td class="center-content">Pallets</th>
+                <td class="center-content">Bundles</th>
             </tr>
           </thead>
           <tbody>
           <% @test2.each do |x|%>
           <tr>
-              <td><%= x[0]%> <%=x[1].to_i.to_s%></td>
-              <td><%= x[2]%></td>
-              <td><%= x[3]%></td>
-              <td><%= x[4]%></td>
-              <td><%= x[5]%></td>
+              <td><%= link_to x[0] +' '+ x[1].to_i.to_s, customerByMonth_path(:month => x[0].to_s,:year => x[1].to_i,:id => @customer.id)%></td>
+              <td class="center-content"><%= x[2]%></td>
+              <td class="center-content"><%= x[3]%></td>
+              <td class="center-content"><%= x[4]%></td>
+              <td class="center-content"><%= x[5]%></td>
           </tr>
           <% end %>
           </tbody>
