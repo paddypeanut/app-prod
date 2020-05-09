@@ -19,6 +19,19 @@ class CustomersController < ApplicationController
     @byMonth = Consignment.all.where(customer_id: @customer.id).group_by_month(:created_at).count
     @breakDown = Consignment.all.where(customer_id: @customer.id).group_by_month(:created_at).pluck('sum(consignments.parcels)', 'sum(consignments.pallets)', 'sum(consignments.bundles)','count(consignments.created_at)')
 
+    @customer = Customer.find(params[:id])
+    @test = @customerConsignments.connection.select_all("SELECT to_char(created_at,'Mon') as mon,
+                                                          extract(year from created_at) as Y,
+                                                          count(created_at) as consignments,
+                                                          sum(parcels) as parcels,
+                                                          sum(pallets) as pallets,
+                                                          sum(bundles) as bundles
+                                                        from consignments
+                                                        where user_id = #{current_user.id}
+                                                        and customer_id = #{@customer.id}
+                                                        group by 1,2")
+    @test2 = @test.rows
+
   end
 
   # GET /customers/new

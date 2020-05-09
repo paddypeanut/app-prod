@@ -47,6 +47,31 @@
         </p>
       </div>
 
+      <div class="col">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+                <th>Month</th>
+                <th>Consignments</th>
+                <th>Parcels</th>
+                <th>Pallets</th>
+                <th>Bundles</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @test2.each do |x|%>
+          <tr>
+              <td><%= x[0]%> <%=x[1].to_i.to_s%></td>
+              <td><%= x[2]%></td>
+              <td><%= x[3]%></td>
+              <td><%= x[4]%></td>
+              <td><%= x[5]%></td>
+          </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+
     
       <div class="col">
         <div>
