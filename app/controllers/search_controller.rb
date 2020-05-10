@@ -11,7 +11,7 @@ class SearchController < ApplicationController
 			else
 				@parameter = params[:search]
 			end
-		@results = @consignments.all.where("customers.customer_code ILIKE ? OR customers.company_name ILIKE ? OR consignments.reference ILIKE ?", "%#{@parameter}%" , "%#{@parameter}%", "%#{@parameter}%")
+		@results = @consignments.all.where("customers.customer_code ILIKE ? OR customers.company_name ILIKE ? OR consignments.reference ILIKE ?", "%#{@parameter}%" , "%#{@parameter}%", "%#{@parameter}%") .paginate(:page => params[:page], :per_page => 25)
 	end
 
 	def search_date

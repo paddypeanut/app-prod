@@ -25,9 +25,14 @@
 
 		<% if @results.count >= 1 %>
 		<p>Showing Results <strong><%= @results.count %></strong> for <strong><%= @parameter %></strong>
-			<%= render partial: "consignments/consignment-table" %>
+			<%= render partial: "consignments/results" %>
 		<% else %>
 			<p>No Results Found</p>
 		<% end %>
 	</div>
 </div>
+<script>
+   $(function(){
+     $('.pagination a').attr('data-remote', 'true')
+   });
+ </script>
