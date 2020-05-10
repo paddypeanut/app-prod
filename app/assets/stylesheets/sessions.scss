@@ -1,3 +1,49 @@
 // Place all the styles related to the sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+
+#login-panel {
+	width:500px;
+	margin:auto;
+	position:relative;
+	left:-12.5rem;
+}
+
+.login-wrapper {
+	margin:10px;
+	padding:10px;
+}
+
+.login-wrapper input {
+	width:100%;
+	margin:5px auto;
+}
+
+.login-wrapper input[type="text"], .login-wrapper input[type="password"] {
+	box-sizing:border-box;
+	outline:none;
+	border:none;
+	border-bottom:1px solid #ddd;
+	background:trandparent;
+	margin-bottom:10px;
+	height:45px;
+}
+
+
+
+input[type="submit"], input[type="button"] , .prim-btn{
+	color:#ffffff;
+	background-color:#00A6FB;
+	font-family: 'Manrope', sans-serif;
+	padding:10px;
+	border-radius:5px;
+	font-size:1.25em;
+	transition: background .25s ease-in-out;
+}
+
+input[type="submit"]:hover, input[type="button"]:hover   {
+	background-color:#4a69bb;
+	transition: background .25s ease-in-out;
+}
