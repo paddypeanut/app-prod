@@ -1,8 +1,13 @@
-<h1>Sign Up</h1>
-<%= form_for @user do |f|%>
-  <%= f.label :username%><br>
-  <%= f.text_field :username%><br>
-  <%= f.label :password%><br>
-  <%= f.password_field :password%><br>
-  <%= f.submit %>
-<%end%>
+<div class="container-fluid">
+	<div id="login-panel" class="content bg-white login-wrapper">		
+		<h1>Sign Up</h1>
+		<br>
+		<%= form_for @user do |f|%>
+		  <%= f.label :username%><br>
+		  <%= f.text_field :username%><br>
+		  <%= f.label :password%><br>
+		  <%= f.password_field :password%><br>
+		  <%= f.submit %>
+		<%end%>
+	</div>
+</div>
