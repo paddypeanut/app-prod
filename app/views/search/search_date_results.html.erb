@@ -33,9 +33,14 @@
 		<% if @results.count >=1 %>
 			<p>Showing <strong><%=@results.count%></strong> results between <strong><%= @startDate.strftime('%d-%m-%Y') %></strong> and <strong><%= @endDate.strftime('%d-%m-%Y')%></strong></p>
 			<br>
-			<%= render partial: "consignments/consignment-table" %>
+			<%= render partial: "consignments/results" %>
 		<% else %>
 			<p>No Results found</p>
 		<% end %>
 	</div>
 </div>
+<script>
+   $(function(){
+     $('.pagination a').attr('data-remote', 'true')
+   });
+ </script>
