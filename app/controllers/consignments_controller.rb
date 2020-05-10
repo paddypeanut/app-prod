@@ -43,7 +43,7 @@ class ConsignmentsController < ApplicationController
         @heading = "this month"
     end
     @range = @startDate..@endDate
-    @results = @userConsignments.where('consignments.created_at' => @range)
+    @results = @userConsignments.where('consignments.created_at' => @range).paginate(:page => params[:page], :per_page => 25)
 
 
     @test = @userConsignments.connection.select_all("SELECT
