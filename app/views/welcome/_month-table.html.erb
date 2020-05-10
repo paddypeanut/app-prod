@@ -1,0 +1,22 @@
+<div id="month-results">
+<table class="table table-striped">
+          <tr>
+            <td>Day</td>
+            <td>Consignments</td>
+            <td>Parcels</td>
+            <td>Pallets</td>
+            <td>Bundles</td>
+          
+          </tr>
+        <% @monthFull.each do |x| %>
+          <tr>
+            <td><%= link_to x[0].to_date.strftime('%a, %d %B'), by_date_path(:startdate =>x[0],:enddate => x[0]) %></td>
+            <td class="center-content"><%= x[4]%></td>
+            <td class="center-content"><%= x[1]%></td>
+            <td class="center-content"><%= x[2]%></td>
+            <td class="center-content"><%= x[3]%></td>
+          </tr>
+        <% end %>
+        </table>
+        <%= will_paginate @monthFull, renderer: BootstrapPagination::Rails %>
+      </div>

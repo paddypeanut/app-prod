@@ -42,7 +42,7 @@ class WelcomeController < ApplicationController
 				AND user_id = #{current_user.id}
 				GROUP BY DATE(created_at)
 				ORDER BY DATE(created_at) ASC")
-		@monthFull = @monthQuery.rows
+		@monthFull = @monthQuery.rows.paginate(:page => params[:page], :per_page => 10)
 
 
 	end
