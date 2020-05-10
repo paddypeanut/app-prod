@@ -8,7 +8,7 @@ class WelcomeController < ApplicationController
 		@todayRange = @today.beginning_of_day..@today.end_of_day
 		@yesterdayRange = @yesterday.beginning_of_day..@yesterday.end_of_day
 
-		@todayConsignments = @userConsignments.where('consignments.created_at' => @todayRange)
+		@todayConsignments = @userConsignments.where('consignments.created_at' => @todayRange).paginate(:page => params[:page], :per_page => 2)
 		@todayBreakdown = @todayConsignments.pluck('count(consignments.created_at)','sum(consignments.parcels)','sum(consignments.pallets)','sum(consignments.bundles)')
 
 		@yesterdayConsignments = @userConsignments.where('consignments.created_at' => @yesterdayRange)
