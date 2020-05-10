@@ -1,0 +1,45 @@
+<div id="results">
+<table class="table table-striped 100-wide">
+  <thead>
+    <tr>
+      <th>Job Id</th>
+      <th>Company</th>
+      <th>Reference</th>
+      <th>Parcels</th>
+      <th>Pallets</th>
+      <th>Bundles</th>
+      <th>Add 1</th>
+      <th>Add 2</th>
+      <th>Add 3</th>
+      <th>County</th>
+      <th>Eircode</th>
+      <th>Date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @results.each do |consignment| %>
+      <tr>
+        <td><%= consignment.id %></td>
+        <td><%= link_to consignment.customer.company_name ,consignment.customer%></td>
+        <td><%= consignment.reference %></td>
+        <td><%= consignment.parcels %></td>
+        <td><%= consignment.pallets %></td>
+        <td><%= consignment.bundles %></td>
+        <td><%= consignment.customer.address1 %></td>
+        <td><%= consignment.customer.address2 %></td>
+        <td><%= consignment.customer.address3 %></td>
+        <td><%= consignment.customer.county %></td>
+        <td><%= consignment.customer.eircode %></td>
+        <td><%= link_to consignment.created_at.strftime('%d-%m-%Y'), by_date_path(:startdate => consignment.created_at, :enddate => consignment.created_at)%></td>
+        <td><%= link_to 'Show', consignment %></td>
+        <td><%= link_to 'Edit', edit_consignment_path(consignment) %></td>
+        <td><%= link_to 'Destroy', consignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>
+<%= will_paginate @results, renderer: BootstrapPagination::Rails %>
+</div>

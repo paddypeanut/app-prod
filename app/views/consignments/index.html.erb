@@ -5,10 +5,15 @@
 
 <h1>Consignments</h1>
 <hr/>
-<%= render partial: "consignments/consignment-table"%>
+<%= render partial: "consignments/results"%>
 
 <br>
 
 <%= link_to 'New Consignment', new_consignment_path %>
 </div>
 </div>
+<script>
+   $(function(){
+     $('.pagination a').attr('data-remote', 'true')
+   });
+ </script>

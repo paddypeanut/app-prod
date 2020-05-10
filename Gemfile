@@ -24,6 +24,8 @@ gem 'jbuilder', '~> 2.7'
 
  gem 'groupdate'
 
+ gem 'will_paginate-bootstrap'
+
 
 
 # Use Active Storage variant

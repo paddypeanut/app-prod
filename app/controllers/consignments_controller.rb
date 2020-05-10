@@ -5,7 +5,7 @@ class ConsignmentsController < ApplicationController
   # GET /consignments.json
   def index
     @consignments = Consignment.all
-    @results = @consignments.joins(:customer).includes(:user).where(user: session[:user_id]).order('consignments.created_at DESC')
+    @results = @consignments.joins(:customer).includes(:user).where(user: session[:user_id]).order('consignments.created_at DESC').paginate(:page => params[:page], :per_page => 3)
   end
 
   # GET /consignments/1
@@ -34,12 +34,12 @@ class ConsignmentsController < ApplicationController
         @endDate = @startDate.end_of_day
         @heading = "yesterday"
       elsif params[:filter] == 'Week'
-        @startDate = Date.today.beginning_of_week
-        @endDate = @startDate.end_of_week
+        @startDate = Date.today.beginning_of_week.beginning_of_day
+        @endDate = @startDate.end_of_week.end_of_day
         @heading = "this week"
       elsif params[:filter] == 'Month'
-        @startDate = Date.today.beginning_of_month
-        @endDate = Date.today.end_of_month
+        @startDate = Date.today.beginning_of_month.beginning_of_day
+        @endDate = Date.today.end_of_month.end_of_day
         @heading = "this month"
     end
     @range = @startDate..@endDate

@@ -14,8 +14,8 @@ class WelcomeController < ApplicationController
 		@yesterdayConsignments = @userConsignments.where('consignments.created_at' => @yesterdayRange)
 		@yesterdayBreakdown = @yesterdayConsignments.pluck('count(consignments.created_at)','sum(consignments.parcels)','sum(consignments.pallets)','sum(consignments.bundles)')
 
-		@weekStart = @today.beginning_of_week
-		@weekEnd = @weekStart.end_of_week
+		@weekStart = @today.beginning_of_week.beginning_of_day
+		@weekEnd = @weekStart.end_of_week.end_of_day
 		@weekRange = @weekStart..@weekEnd
 		@weekConsignments = @userConsignments.where('consignments.created_at' => @weekRange)
 		@weekBreakdown = @weekConsignments.pluck('count(consignments.created_at)','sum(consignments.parcels)','sum(consignments.pallets)','sum(consignments.bundles)')
@@ -29,8 +29,8 @@ class WelcomeController < ApplicationController
 				ORDER BY DATE(created_at) ASC")
 		@weekFull = @weekQuery.rows
 
-		@monthStart = @today.beginning_of_month
-		@monthEnd = @monthStart.end_of_month
+		@monthStart = @today.beginning_of_month.beginning_of_day
+		@monthEnd = @monthStart.end_of_month.end_of_day
 		@monthRange = @monthStart..@monthEnd
 		@monthConsignments = @userConsignments.where('consignments.created_at' => @monthRange)
 		@monthByDay = @monthConsignments.group_by_day('consignments.created_at').count
