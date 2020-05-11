@@ -6,6 +6,16 @@ class ConsignmentsController < ApplicationController
   def index
     @consignments = Consignment.all
     @results = @consignments.joins(:customer).includes(:user).where(user: session[:user_id]).order('consignments.created_at DESC').paginate(:page => params[:page], :per_page => 25)
+    @test = @results.connection.select_all("SELECT to_char(created_at,'Mon') as mon,
+                                                          extract('year' from created_at) as Year,
+                                                          count(created_at) as consignments,
+                                                          sum(parcels) as parcels,
+                                                          sum(pallets) as pallets,
+                                                          sum(bundles) as bundles
+                                                        from consignments
+                                                        where user_id = #{current_user.id}
+                                                        group by 1,2")
+    @test2 = @test.rows
   end
 
   # GET /consignments/1
@@ -65,6 +75,27 @@ class ConsignmentsController < ApplicationController
     @endDate = params[:enddate].to_date
     @range = @startDate.beginning_of_day..@endDate.end_of_day
     @results = @userConsignments.where('consignments.created_at' => @range)
+  end
+
+  def consignments_by_month
+    @consignments = Consignment.all
+    @userConsignments = @consignments.joins(:customer).includes(:user).where(user: session[:user_id]).order('consignments.created_at DESC')
+    @month = params[:month]
+    @year = params[:year]
+    @customerId = params[:id]
+    @fullDate = @month + ' '+ @year
+    @startDate = @fullDate.to_date.beginning_of_month
+    @endDate = @fullDate.to_date.end_of_month
+    @range = @startDate..@endDate
+    @results = @userConsignments.where('consignments.created_at' => @range).paginate(:page => params[:page], :per_page => 25)
+    @test = @results.connection.select_all("SELECT
+        DATE(created_at), SUM(parcels) ,SUM(pallets), SUM(bundles),COUNT(created_at)
+        FROM consignments
+        WHERE created_at BETWEEN '#{@startDate}' AND '#{@endDate}'
+        AND user_id = #{current_user.id}
+        GROUP BY DATE(created_at)
+        ORDER BY DATE(created_at) ASC")
+    @test2 = @test.rows
   end
 
   # GET /consignments/1/edit

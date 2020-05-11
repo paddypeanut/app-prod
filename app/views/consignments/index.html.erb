@@ -5,8 +5,42 @@
 
 <h1>Consignments</h1>
 <hr/>
-<%= render partial: "consignments/results"%>
+<% if @results.count >= 1 %>
+<div class="row">
+	<div class="col">
+		<table class="table table-striped">
+          <thead>
+            <tr>
+                <th>Month</th>
+                <td class="center-content">Consignments</th>
+                <td class="center-content">Parcels</th>
+                <td class="center-content">Pallets</th>
+                <td class="center-content">Bundles</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @test2.each do |x|%>
+          <tr>
+              <td><%= link_to x[0] +' '+ x[1].to_i.to_s,consignments_by_month_path(:month => x[0],:year => x[1].to_i.to_s) %></td>
+              <td class="center-content"><%= x[2]%></td>
+              <td class="center-content"><%= x[3]%></td>
+              <td class="center-content"><%= x[4]%></td>
+              <td class="center-content"><%= x[5]%></td>
+          </tr>
+          <% end %>
+          </tbody>
+        </table>
+	</div>
+	<div class="col">
+		<canvas id="chart1">
+		</canvas>
+	</div>
+</div>
 
+<%= render partial: "consignments/results"%>
+<% else %>
+<p>No consignments added.</p>
+<% end %>
 <br>
 
 <%= link_to 'New Consignment', new_consignment_path %>
@@ -17,3 +51,56 @@
      $('.pagination a').attr('data-remote', 'true')
    });
  </script>
+
+ <script>
+var monthChart = document.getElementById('chart1').getContext('2d');
+var chart = new Chart(monthChart, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+        labels: [
+          <% @test2.each do |a|%>
+              '<%= a[0] %>',
+            <% end %>
+        ],
+        datasets: [{
+            label: 'Consignments',
+            backgroundColor: ['rgb(236, 219, 83)',
+                              'rgb(227,65,50)',
+                              'rgb(108,160,220)',
+                              'rgb(147,71,66)',
+                              'rgb(219,178,209)',
+                              'rgb(235,150,135)',
+                              'rgb(0,166,140)',
+                              'rgb(100,83,148)',
+                              'rgb(108,79,60)',
+                              'rgb(235,225,223)',
+                              'rgb(188,108,167)',
+                              'rgb(191,216,51)'],
+            borderColor: 'rgb(255, 99, 132)',
+            data: [
+            <% @test2.each do |a|%>
+              '<%= a[2] %>',
+            <% end %>
+            ],
+            
+        }]
+
+    },
+
+    // Configuration options go here
+    options: {
+      scales:{
+        yAxes:[{
+          display:true,
+          ticks:{
+            suggestedMin:0,
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+});
+  </script>
