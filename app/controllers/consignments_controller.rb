@@ -100,6 +100,7 @@ class ConsignmentsController < ApplicationController
 
   # GET /consignments/1/edit
   def edit
+    @customers = Customer.joins(:user).where(user: session[:user_id])
   end
 
   # POST /consignments
