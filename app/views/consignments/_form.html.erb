@@ -11,10 +11,16 @@
     </div>
   <% end %>
 
-  <% options = options_from_collection_for_select(@customers, 'customer_code', 'customer_code') %>
-      <%= form.select:company_code, options %>
+<div class="row">
+  <div class="col">
+  <% options = options_from_collection_for_select(@customers, 'company_name', 'company_name') %>
+      <%= form.select:'company_name', options %>
       <br>
+      <div class="hide">
+      <% options3 = options_from_collection_for_select(@customers, 'customer_code', 'customer_code') %>
+      <%= form.select:company_code, options3 %>
       <br>
+    </div>
 
       <div class="hide">
       <% options2 = options_from_collection_for_select(@customers, 'id', 'id') %>
@@ -52,12 +58,55 @@
     <%= form.submit %>
   </div>
 <% end %>
+</div>
+<div id="display-address" class="col">
+
+</div>
+</div>
+
+ <div class="hide">
+    <input  type="text" id="myName" list="name_options" readonly value=""/>
+    <datalist id ="name_options" >
+      <% @customers.each do |x|%>
+        <option  value="<%= x.company_name%>">
+      <% end %>
+    </datalist>
+    <input type="text" id="myAdd1" list="address1_options" readonly value=""/>
+    <datalist id ="address1_options" >
+      <% @customers.each do |x|%>
+        <option  value="<%= x.address1%>">
+      <% end %>
+    </datalist>
+    <input type="text" id="myAdd2" list="address2_options" readonly value=""/>
+    <datalist id ="address2_options" >
+      <% @customers.each do |x|%>
+        <option  value="<%= x.address2%>">
+      <% end %>
+    </datalist>
+    <input type="text" id="myAdd3" list="address3_options" readonly value=""/>
+    <datalist id ="address3_options" >
+      <% @customers.each do |x|%>
+        <option  value="<%= x.address3%>">
+      <% end %>
+    </datalist>
+    <datalist id ="county_options" >
+      <% @customers.each do |x|%>
+        <option  value="<%= x.county%>">
+      <% end %>
+    </datalist>
+    <input type="text" id="myEircode" list="eircode_options" readonly value=""/>
+    <datalist id ="eircode_options" >
+      <% @customers.each do |x|%>
+        <option  value="<%= x.eircode %>">
+      <% end %>
+    </datalist>
+  </div>
 
 <script>
   jQuery(
 
       function($){
-        $('#consignment_company_code').on('change',function(){
+        $('#consignment_company_name').on('change',function(){
 
           var sel = $('option:selected', this).index();
 
@@ -66,6 +115,25 @@
           $('#consignment_customer_id option').filter(function(index, el){
             return el.index == sel;
           }).prop('selected',true);
+
+          $('#consignment_company_code option').filter(function(index, el){
+            return el.index == sel;
+          }).prop('selected',true);
+
+          var myName = document.getElementById("name_options").options[sel].value;
+          var myAdd1 = document.getElementById("address1_options").options[sel].value;
+          var myAdd2 = document.getElementById("address2_options").options[sel].value;
+          var myAdd3 = document.getElementById("address3_options").options[sel].value;
+          var myEircode = document.getElementById("eircode_options").options[sel].value;
+          var myCounty = document.getElementById("county_options").options[sel].value;
+
+          $('#myName').val(myName);
+          $('#myAdd1').val(myAdd1);
+          $('#myAdd2').val(myAdd2);
+          $('#myAdd3').val(myAdd3);
+          $('#myEircode').val(myEircode);
+
+          $('#display-address').html('<h3>'+myName+'</h3>'+ myAdd1 +'<br>'+ myAdd2 + '<br>'+myAdd3 + '<br>' + myCounty + '<br>'+myEircode)
 
          
         });
