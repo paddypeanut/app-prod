@@ -94,7 +94,7 @@ class ConsignmentsController < ApplicationController
         WHERE created_at BETWEEN '#{@startDate}' AND '#{@endDate}'
         AND user_id = #{current_user.id}
         GROUP BY DATE(created_at)
-        ORDER BY DATE(created_at) ASC")
+        ORDER BY DATE(created_at) DESC")
     @test2 = @test.rows
   end
 
