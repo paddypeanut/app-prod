@@ -2,6 +2,7 @@
 	<div class="bg-white content">
 		<h2>Consignments added this month</h2>
 		<hr/>
+    <% if @monthFull.count >= 1%>
 		<div class="row">
 			<div class="col-4">
 				<%= render partial: "welcome/month-table" %>
@@ -11,6 +12,10 @@
 				</canvas>
 			</div>  
 	</div>
+  <% else %>
+  <p>No consignments added this month.</p>
+  <% end %>
+</div>
 </div>
  <script>
    $(function(){

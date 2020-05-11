@@ -2,7 +2,7 @@
 	<div class="bg-white content">
 		<h2>Consignments added thie week</h2>
 		<hr>
-
+		<% if @weekFull.count >= 1 %>
 		<div class="row">
 			<div class="col">
 				<table class="table table-striped">
@@ -36,12 +36,7 @@
 				<canvas id="bar-chart">
 				</canvas>
 			</div>
-		</div>
-	</div>
-</div>
-
-<script>
-	var ctx = document.getElementById('bar-chart').getContext('2d');
+				var ctx = document.getElementById('bar-chart').getContext('2d');
 var chart = new Chart(ctx, {
     // The type of chart we want to create
     type: 'bar',
@@ -134,3 +129,11 @@ var chart = new Chart(ctx, {
 
 		
   </script>
+		</div>
+		<% else %>
+		<p>No consignments added this week.</p>
+		<% end %>
+	</div>
+</div>
+
+

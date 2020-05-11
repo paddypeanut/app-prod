@@ -3,7 +3,11 @@
 		<h2>Consignments added today</h2>
 		<hr>
 		<% @results = @todayConsignments %>
+		<% if @results.count >= 1 %>
 		<%= render partial: "consignments/consignment-table"%>
+		<% else %>
+		<p>No consignments added today.</p>
+		<% end %>
 	</div>
 
 </div>

@@ -26,7 +26,7 @@
 				</ul>
 		</div>
 		<div class="col bg-white content panel-content">
-			<h2><%= link_to 'Week' , show_panel_path(:filter =>"Week")%></h2>
+			<h2><%= link_to 'This Week' , show_panel_path(:filter =>"Week")%></h2>
 			<hr/>
 				<ul>
 					<%  @weekBreakdown.each do |job| %>
@@ -38,7 +38,7 @@
 				</ul>
 		</div>
 		<div class="col bg-white content panel-content">
-			<h2><%= link_to 'Month' , show_panel_path(:filter =>"Month")%></h2>
+			<h2><%= link_to 'This Month' , show_panel_path(:filter =>"Month")%></h2>
 			<hr/>
 				<ul>
 					<%  @monthBreakdown.each do |job| %>
