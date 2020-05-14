@@ -34,7 +34,7 @@
         <td><%= consignment.customer.address3 %></td>
         <td><%= consignment.customer.county %></td>
         <td><%= consignment.customer.eircode %></td>
-        <td><%= link_to consignment.created_at.strftime('%d-%m-%Y'), by_date_path(:startdate => consignment.created_at, :enddate => consignment.created_at)%></td>
+        <td><%= link_to consignment.created_at.strftime('%d/%m/%Y'), by_date_path(:startdate => consignment.created_at, :enddate => consignment.created_at)%></td>
         <td><%= link_to 'Show', consignment %></td>
         <td><%= link_to 'Edit', edit_consignment_path(consignment) %></td>
         <td><%= link_to 'Destroy', consignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -48,17 +48,18 @@
 <script>
 
 $(document).ready(function() {
-   $.fn.dataTable.moment( 'dd-mm-yy' );
+   $.fn.dataTable.moment( 'DD/MM/YYY');
     var table = $('#order-table').DataTable({
    'aoColumnDefs': [{
         'bSortable': false,
         'aTargets': ['no-sort']
 
     }],
+    "columnDefs": [ { "type": "date-ek", "targets": [12] } ],
     "lengthChange": true,
    'pageLength': 20,
    "lengthMenu": [ 10, 25, 50, 75, 100 ],
-   "order": [[ 12, "desc" ]]
+   "order": [[ 12, "DESC" ]]
 });
 } );
 </script>
