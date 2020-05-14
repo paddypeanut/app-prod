@@ -1,10 +1,15 @@
 <div class="container-fluid">
+
+
+
+
 	<div id="login-panel" class="content bg-white login-wrapper">
 		<h1>Welcome</h1>
 		<% if logged_in? %>
-		    <h1>You are Logged In, <%= current_user.username %></h1>
+		    <% controller.redirect_to :controller => 'welcome', :action => 'index' %>
 		<%end%>
 		<%= button_to "Login", '/login', method: :get%>
 		<%= button_to "Sign Up", '/users/new', method: :get%>
 	</div>
+
 </div>

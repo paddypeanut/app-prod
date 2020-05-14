@@ -1,4 +1,4 @@
-<%= form_with(model: consignment, local: true) do |form| %>
+<%= form_with(model: consignment, local: true, html: {id: "my_form"}) do |form| %>
   <% if consignment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(consignment.errors.count, "error") %> prohibited this consignment from being saved:</h2>
@@ -31,12 +31,12 @@
 
   <div class="field">
     <%= form.label :reference %>
-    <%= form.text_field :reference %>
+    <%= form.text_field :reference , :required => true%>
   </div>
 
   <div class="field">
     <%= form.label :parcels %>
-    <%= form.number_field :parcels %>
+    <%= form.number_field :parcels %><div class="form-alert alert-danger"></div>
   </div>
 
   <div class="field">
@@ -54,7 +54,7 @@
         <input type="text" id="user_id" name="consignment[user_id]" value="<%= current_user.id %>">
   </div>
 
-  <div class="actions">
+  <div id="form-submit" class="actions">
     <%= form.submit %>
   </div>
 <% end %>
@@ -138,5 +138,21 @@
          
         });
       });
+</script>
+<script>
+$('#my_form').on('submit', function(e){
+var parcels = $('#consignment_parcels').val();
+var pallets = $('#consignment_pallets').val();
+var bundles = $('#consignment_bundles').val();
+if (parcels == 0 && pallets == 0 && bundles == 0){
+  e.preventDefault();
+  $('.alert-danger').html('Parcel, Pallet or Bundle Quantity must be greater than 0')
+  $('.form-alert').css('display','inline-block')
+  return false;
+}
+
+
+
+});
 
 </script>

@@ -1,5 +1,6 @@
 <div class="container-fluid">
   <div class="bg-white content">
+
 		<h1>Editing Consignment</h1>
 		<hr/>
 		<%= render 'form', consignment: @consignment %>
@@ -8,3 +9,27 @@
 		<%= link_to 'Back', consignments_path %>
 	</div>
 </div>
+<script>
+	$(document).ready(function(){
+		var current ='<%= @consignment.company_code %>'
+		
+		// all option's value
+		$('#consignment_company_code').find('option').each(function(){
+		    if($(this).val() == current){
+		    	var x = $(this).index();
+		    	$('#consignment_company_name option').filter(function(index, el){
+	            return el.index == x;
+	          	}).prop('selected',true);
+	          	$('#consignment_company_code option').filter(function(index, el){
+	            return el.index == x;
+	          	}).prop('selected',true);
+		    }
+		});
+
+	});
+			
+		
+	
+</script>
+
+

@@ -6,6 +6,7 @@ class ConsignmentsController < ApplicationController
   def index
     @consignments = Consignment.all
     @results = @consignments.joins(:customer).includes(:user).where(user: session[:user_id]).order('consignments.created_at DESC').paginate(:page => params[:page], :per_page => 25)
+    @results2 = @consignments.joins(:customer).includes(:user).where(user: session[:user_id]).order('consignments.created_at DESC')
     @test = @results.connection.select_all("SELECT to_char(created_at,'Mon') as mon,
                                                           extract('year' from created_at) as Year,
                                                           count(created_at) as consignments,
@@ -131,7 +132,7 @@ class ConsignmentsController < ApplicationController
         format.json { render json: @consignment.errors, status: :unprocessable_entity }
       end
     end
-  end
+  end 
 
   # DELETE /consignments/1
   # DELETE /consignments/1.json
