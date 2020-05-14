@@ -29,7 +29,8 @@ class CustomersController < ApplicationController
                                                         from consignments
                                                         where user_id = #{current_user.id}
                                                         and customer_id = #{@customer.id}
-                                                        group by 1,2")
+                                                        group by 1,2
+                                                        order by 1 ASC")
     @test2 = @test.rows
 
   end

@@ -16,7 +16,7 @@ class ConsignmentsController < ApplicationController
                                                         from consignments
                                                         where user_id = #{current_user.id}
                                                         group by 1,2
-                                                        order by parcels DESC
+                                                        order by 1 ASC
                                                         ")
     @test2 = @test.rows
   end
