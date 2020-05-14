@@ -15,7 +15,9 @@ class ConsignmentsController < ApplicationController
                                                           sum(bundles) as bundles
                                                         from consignments
                                                         where user_id = #{current_user.id}
-                                                        group by 1,2")
+                                                        group by 1,2
+                                                        order by parcels DESC
+                                                        ")
     @test2 = @test.rows
   end
 
