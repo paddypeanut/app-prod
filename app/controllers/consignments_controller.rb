@@ -5,7 +5,7 @@ class ConsignmentsController < ApplicationController
   # GET /consignments.json
   def index
     @consignments = Consignment.all
-    @results = @consignments.joins(:customer).includes(:user).where(user: session[:user_id]).order('consignments.created_at DESC').paginate(:page => params[:page], :per_page => 25)
+    @results = @consignments.joins(:customer).includes(:user).where(user: session[:user_id]).order('consignments.created_at DESC')
     @results2 = @consignments.joins(:customer).includes(:user).where(user: session[:user_id]).order('consignments.created_at DESC')
     @test = @results.connection.select_all("SELECT to_char(created_at,'Mon') as mon,
                                                           extract('year' from created_at) as Year,
@@ -88,7 +88,7 @@ class ConsignmentsController < ApplicationController
     @startDate = @fullDate.to_date.beginning_of_month
     @endDate = @fullDate.to_date.end_of_month
     @range = @startDate..@endDate
-    @results = @userConsignments.where('consignments.created_at' => @range).paginate(:page => params[:page], :per_page => 25)
+    @results = @userConsignments.where('consignments.created_at' => @range)
     @test = @results.connection.select_all("SELECT
         DATE(created_at), SUM(parcels) ,SUM(pallets), SUM(bundles),COUNT(created_at)
         FROM consignments

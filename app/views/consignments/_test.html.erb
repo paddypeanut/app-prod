@@ -1,5 +1,5 @@
 <div id="test">
-<table id="results-table" class="table table-striped 100-wide sortable">
+<table id="order-table" class="table table-striped 100-wide sortable">
   <thead>
     <tr>
       <th>Job Id</th>
@@ -21,7 +21,7 @@
   </thead>
 
   <tbody>
-    <% @results2.each do |consignment| %>
+    <% @results.each do |consignment| %>
       <tr>
         <td><%= consignment.id %></td>
         <td><%= link_to consignment.customer.company_name ,consignment.customer%></td>
@@ -48,11 +48,15 @@
 <script>
 
 $(document).ready(function() {
-    var table = $('#results-table').DataTable({
+    var table = $('#order-table').DataTable({
    'aoColumnDefs': [{
         'bSortable': false,
         'aTargets': ['no-sort']
-    }]
+
+    }],
+    "lengthChange": true,
+   'pageLength': 20,
+   "lengthMenu": [ 10, 25, 50, 75, 100 ]
 });
 } );
 </script>
