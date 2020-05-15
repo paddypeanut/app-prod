@@ -7,7 +7,7 @@ class ConsignmentsController < ApplicationController
     @consignments = Consignment.all
     @results = @consignments.joins(:customer).includes(:user).where(user: session[:user_id]).order('consignments.created_at DESC')
     @results2 = @consignments.joins(:customer).includes(:user).where(user: session[:user_id]).order('consignments.created_at DESC')
-    @test = @results.connection.select_all("SELECT to_char(created_at,'Mon') as mon,
+    @test = @results.connection.select_all("SELECT to_char(created_at,'Mon') as created_at,
                                                           extract('year' from created_at) as Year,
                                                           count(created_at) as consignments,
                                                           sum(parcels) as parcels,
@@ -16,8 +16,7 @@ class ConsignmentsController < ApplicationController
                                                         from consignments
                                                         where user_id = #{current_user.id}
                                                         group by 1,2
-                                                        order by 1 ASC
-                                                        ")
+                                                        order by 1 ASC")
     @test2 = @test.rows
   end
 
